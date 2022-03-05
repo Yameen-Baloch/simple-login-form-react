@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () =>{
+  const[fullName, setFullName] = useState({
+    Fname: '',
+    Lname: '',
+    email: '',
+    phone: ''
+  });
+  
+
+  const eventControl = (e) =>{
+
+    const {name, value} = e.target;
+
+    setFullName((prevValue) =>{
+      return{
+     ...prevValue,
+     [name]: value
+      }
+      
+    })
+    
+  }
+
+
+  const Submit = (e) =>{
+    e.preventDefault();
+    alert("Form Submited");
+  }
+  return <>
+  <form onSubmit={Submit}>
+    <div>
+    <h1> Hello {fullName.Fname} {fullName.Lname} {fullName.email} {fullName.phone}</h1>
+
+    <input type='text' placeholder='Enter Your Name' name='Fname'
+    onChange = {eventControl} value = {fullName.Fname}/>
+
+    <br />
+
+    <input type='text' placeholder='Enter Your Last Name' name='Lname'
+    onChange={eventControl} value = {fullName.Lname}/>
+
+    <br />
+
+    <input type='email' placeholder='Enter Your Email' name='email'
+    onChange={eventControl} value = {fullName.email}/>
+
+    <br />
+
+    <input type='number' placeholder='Enter Your Phone' name='phone'
+    onChange={eventControl} value = {fullName.phone}/>
+    
+    <button type='submit'>Submit</button>
     </div>
-  );
+    </form>
+  </>
 }
 
 export default App;
